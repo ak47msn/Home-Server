@@ -11,6 +11,6 @@ export default {
 
     },
     getMyProfile: (req: Request, res: Response) => {
-        return res.status(200).json({ user: req.user });
+        return res.status(200).json(req.user);
     }
 }

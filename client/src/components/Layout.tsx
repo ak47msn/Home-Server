@@ -1,23 +1,33 @@
 import { Outlet, Link } from "react-router-dom"
 import "@/styles/components/layout.scss"
-import { useEffect } from "react"
-import axios from "axios";
+import { useUser } from "../hooks/useUser";
+
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Layout = () => {
-    useEffect(() => {
-        const token = localStorage.getItem("token");
+    const { user, loading } = useUser();
+    const navigate = useNavigate();
 
-        axios.get("/api/users/me")
-    }, []);
+    useEffect(() => {
+        if (!loading && !user) {
+            navigate("/login");
+        }
+    }, [loading, user, navigate]);
+
+    if (loading) return <p>Cargando…</p>;
+
+
+    console.log(user);
 
     return (
         <div className="layout">
             <header className="layout-header">
-                <div className="logo">Mi App</div>
+                <div className="logo">{user?.firstName || "App"}</div>
                 <nav className="nav">
                     <Link to="/">Home</Link>
                     <Link to="/about">About</Link>
-                    <Link to="/logout">Logout</Link>
+                    {user ? <Link to="/logout">Logout</Link> : <Link to="/login">Login</Link>}
                 </nav>
             </header>
 
