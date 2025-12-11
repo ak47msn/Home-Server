@@ -1,8 +1,10 @@
 import { useState } from "react";
 import axios from "axios";
 import "@/styles/pages/Login.scss";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+    const navigate = useNavigate();
     const [username, setusername] = useState("");
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
@@ -19,7 +21,8 @@ const Login = () => {
                 password,
             });
             localStorage.setItem("token", response.data.token);
-            window.location.href = "/dashboard";
+            navigate("/");
+            window.location.reload();
         } catch (err: any) {
             setError(err.response?.data?.message || "Error al iniciar sesión");
         } finally {

@@ -3,16 +3,18 @@ import Home from "./pages/Home"
 import Login from "./pages/Login"
 import Layout from "./components/Layout"
 import { ProtectedRoute } from "./components/ProtectedRoute"
+import Logout from "./components/Logout"
 
 function App() {
   return (
     <Router>
       <Routes>
         <Route element={<Layout />}>
-          <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/logout" element={<Logout />} />
           <Route element={<ProtectedRoute />}>
-            <Route path="/logout" element={<Login />} />
+            <Route path="/" element={<Home />} />
+
             <Route path="/about" element={<Login />} />
           </Route>
         </Route>

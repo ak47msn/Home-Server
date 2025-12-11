@@ -1,0 +1,128 @@
+.home-container {
+    padding: 2rem;
+
+    h1 {
+        color: #fff;
+        font-size: 2.2rem;
+        margin-bottom: 0.5rem;
+        text-shadow: 0 0 8px rgba(255,255,255,0.2);
+    }
+
+    p {
+        color: #ccc;
+        margin-bottom: 2rem;
+    }
+
+    .cards-container {
+        display: flex;
+        gap: 2rem;
+        flex-wrap: wrap;
+
+        .card {
+            flex: 1 1 250px;
+            min-width: 250px;
+            padding: 2rem 1.5rem;
+            border-radius: 16px;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            transition: all 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+
+            // Overlay semitransparente para mejorar legibilidad
+            &::after {
+                content: "";
+                position: absolute;
+                inset: 0;
+                background: rgba(0,0,0,0.35);
+                border-radius: 16px;
+                pointer-events: none;
+            }
+
+            &:hover {
+                transform: translateY(-8px) scale(1.03);
+                box-shadow: 0 15px 30px rgba(0,0,0,0.7);
+            }
+
+            .card-icon {
+                font-size: 3rem;
+                margin-bottom: 1rem;
+                position: relative;
+                z-index: 1;
+                color: #ffeaa7; // color tipo neón para iconos
+            }
+
+            .card-title {
+                font-size: 1.5rem;
+                font-weight: 700;
+                margin-bottom: 0.5rem;
+                position: relative;
+                z-index: 1;
+                color: #ffffff; // blanco puro para títulos
+                text-shadow: 0 0 6px rgba(255,255,255,0.6);
+            }
+
+            .card-description {
+                font-size: 1rem;
+                margin-bottom: 1.5rem;
+                color: #dcdde1; // blanco suave para descripciones
+                position: relative;
+                z-index: 1;
+            }
+
+            .card-button {
+                padding: 0.6rem 1.2rem;
+                background: rgba(255,255,255,0.2);
+                border: none;
+                border-radius: 8px;
+                color: #fff;
+                font-weight: 600;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                position: relative;
+                z-index: 1;
+                box-shadow: 0 0 8px rgba(255,255,255,0.3);
+
+                &:hover {
+                    background: rgba(255,255,255,0.35);
+                    transform: scale(1.05);
+                    box-shadow: 0 0 12px rgba(255,255,255,0.5);
+                }
+            }
+        }
+
+        // Gradientes por card
+        .card:nth-child(1) { 
+            background: linear-gradient(135deg, #6c5ce7, #a29bfe);
+        }
+        .card:nth-child(2) { 
+            background: linear-gradient(135deg, #00b894, #55efc4);
+        }
+        .card:nth-child(3) { 
+            background: linear-gradient(135deg, #ff7675, #fab1a0);
+        }
+    }
+}
+
+/* Fondo animado de toda la página */
+.home-container {
+    display: flex;
+    flex-direction: column;
+
+    @keyframes gradient {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .cards-container {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+}

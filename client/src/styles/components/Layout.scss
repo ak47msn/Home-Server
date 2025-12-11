@@ -1,46 +1,97 @@
+/* Variables para colores modernos */
+$primary: #6c5ce7;
+$secondary: #00b894;
+$accent: #ffeaa7;
+$background: #0d0d0d;
+$text-light: #f0f0f0;
+$text-muted: #aaa;
+
 .layout {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+	background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+	background-size: 400% 400%;
+	animation: gradient 15s ease infinite;
+	height: 100vh;
+    color: $text-light;
+
+    animation: gradientShift 15s ease infinite;
+
+    @keyframes gradientShift {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+    background-size: 200% 200%;
 
     .layout-header {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 1rem;
-        background: #282828;
-        color: white;
+        padding: 1rem 2rem;
+        background: rgba(15,15,15,0.8);
+        backdrop-filter: blur(10px);
+        box-shadow: 0 4px 20px rgba(0,0,0,0.7);
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: $primary;
+            text-shadow: 0 0 8px rgba(108,92,231,0.7);
+        }
 
         .nav a {
-            color: white;
-            margin-left: 1rem;
+            color: $text-light;
+            margin-left: 1.5rem;
             text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+
+            &:hover {
+                color: $secondary;
+                text-shadow: 0 0 8px $secondary;
+                transform: scale(1.05);
+            }
         }
     }
 
     .layout-body {
         display: flex;
         flex: 1;
-        background: #2c2c2c;
+        background: transparent;
+        padding: 1rem 2rem;
 
         .layout-sidebar {
-            width: 150px;
-            background: #282828;
-            padding: 1rem;
+            width: 220px;
+            background: rgba(25,25,25,0.85);
+            backdrop-filter: blur(10px);
+            padding: 2rem 1rem;
+            border-radius: 12px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.6);
 
             ul {
                 list-style: none;
                 padding: 0;
 
                 li {
-                    margin-bottom: 1rem;
+                    margin-bottom: 1.5rem;
 
                     a {
                         text-decoration: none;
-                        color: white;
+                        color: $text-light;
+                        font-weight: 500;
+                        display: block;
+                        padding: 0.5rem 0.5rem;
+                        border-radius: 6px;
+                        transition: all 0.3s ease;
 
                         &:hover {
-                            color: #0077cc;
+                            background: rgba(108,92,231,0.2);
+                            color: $primary;
+                            transform: translateX(5px);
+                            box-shadow: 0 0 10px rgba(108,92,231,0.5);
                         }
                     }
                 }
@@ -48,17 +99,35 @@
         }
 
         .layout-main {
-            display: flex;
-            width: 100%;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            flex: 1;
+            margin-left: 2rem;
+            background: rgba(15,15,15,0.9);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.6);
+            color: $text-light;
+            min-height: calc(100vh - 160px);
+            overflow-y: auto;
+
+            h1, h2, h3, h4 {
+                color: $primary;
+                margin-bottom: 1rem;
+            }
+
+            p, span, li {
+                color: $text-light;
+            }
         }
     }
 
     .layout-footer {
-        padding: 1rem;
-        background: #282828;
-        color: white;
+        padding: 1rem 2rem;
         text-align: center;
+        color: $text-muted;
+        font-size: 0.9rem;
+        background: rgba(15,15,15,0.85);
+        backdrop-filter: blur(10px);
+        box-shadow: 0 -4px 20px rgba(0,0,0,0.7);
     }
 }
 
@@ -69,11 +138,12 @@
 
         .layout-sidebar {
             width: 100%;
+            margin-bottom: 1rem;
             order: 2;
-            /* sidebar debajo del main si quieres */
         }
 
         .layout-main {
+            margin-left: 0;
             order: 1;
         }
     }
@@ -83,7 +153,7 @@
         align-items: flex-start;
 
         .nav {
-            margin-top: 0.5rem;
+            margin-top: 1rem;
             display: flex;
             flex-wrap: wrap;
 
@@ -93,4 +163,15 @@
             }
         }
     }
+}
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
 }

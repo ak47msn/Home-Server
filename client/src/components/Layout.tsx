@@ -17,9 +17,6 @@ const Layout = () => {
 
     if (loading) return <p>Cargando…</p>;
 
-
-    console.log(user);
-
     return (
         <div className="layout">
             <header className="layout-header">
