@@ -40,10 +40,6 @@ const Layout = () => {
                     <Outlet />
                 </main>
             </div>
-
-            <footer className="layout-footer">
-                Footer content
-            </footer>
         </div>
     )
 }

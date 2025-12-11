@@ -119,16 +119,6 @@ $text-muted: #aaa;
             }
         }
     }
-
-    .layout-footer {
-        padding: 1rem 2rem;
-        text-align: center;
-        color: $text-muted;
-        font-size: 0.9rem;
-        background: rgba(15,15,15,0.85);
-        backdrop-filter: blur(10px);
-        box-shadow: 0 -4px 20px rgba(0,0,0,0.7);
-    }
 }
 
 /* Responsive */

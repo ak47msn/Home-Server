@@ -2,10 +2,8 @@ import "@/styles/pages/Home.scss";
 import { useUser } from "../hooks/useUser";
 
 const Home = () => {
-
     const { user } = useUser();
 
-    
     const cards = [
         {
             title: "Archivos",
@@ -24,6 +22,42 @@ const Home = () => {
             description: "Interactúa con inteligencia artificial para automatizar tareas.",
             icon: "🤖",
             gradient: "linear-gradient(135deg, #ff6b6b, #ff9f43)"
+        },
+        {
+            title: "Chat Interno",
+            description: "Comunícate con otros usuarios dentro de tu red privada.",
+            icon: "💬",
+            gradient: "linear-gradient(135deg, #6c5ce7, #00b894)"
+        },
+        {
+            title: "Gestor de Descargas",
+            description: "Controla tus descargas y archivos de forma centralizada.",
+            icon: "📥",
+            gradient: "linear-gradient(135deg, #fd79a8, #e84393)"
+        },
+        {
+            title: "Panel de Dispositivos",
+            description: "Monitorea y controla tus dispositivos conectados.",
+            icon: "📡",
+            gradient: "linear-gradient(135deg, #00cec9, #0984e3)"
+        },
+        {
+            title: "Notas Rápidas",
+            description: "Escribe recordatorios o listas de tareas rápidas.",
+            icon: "📝",
+            gradient: "linear-gradient(135deg, #ffeaa7, #fab1a0)"
+        },
+        {
+            title: "Dashboard de Red",
+            description: "Visualiza estadísticas de tu red local en tiempo real.",
+            icon: "📊",
+            gradient: "linear-gradient(135deg, #a29bfe, #6c5ce7)"
+        },
+        {
+            title: "Reproductor Multimedia",
+            description: "Reproduce música y videos almacenados en tu servidor.",
+            icon: "🎵",
+            gradient: "linear-gradient(135deg, #ff9f43, #ff6b6b)"
         }
     ];
 

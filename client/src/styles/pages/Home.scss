@@ -1,11 +1,39 @@
 .home-container {
     padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    max-height: calc(100vh - 170px);
+    overflow-y: auto;
+    scroll-behavior: smooth;
+
+    &::-webkit-scrollbar {
+        width: 12px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: rgba(0, 0, 0, 0.3);
+        border-radius: 8px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: linear-gradient(180deg, #667eea, #764ba2);
+        border-radius: 8px;
+        box-shadow: 0 0 6px rgba(0,0,0,0.5);
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+        background: linear-gradient(180deg, #764ba2, #667eea);
+    }
+
+    scrollbar-width: thin;
+    scrollbar-color: #667eea rgba(0,0,0,0.3);
 
     h1 {
         color: #fff;
         font-size: 2.2rem;
         margin-bottom: 0.5rem;
-        text-shadow: 0 0 8px rgba(255,255,255,0.2);
+        text-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
     }
 
     p {
@@ -15,8 +43,9 @@
 
     .cards-container {
         display: flex;
-        gap: 2rem;
+        gap: 1.5rem;
         flex-wrap: wrap;
+        height: 100%;
 
         .card {
             flex: 1 1 250px;
@@ -26,25 +55,26 @@
             position: relative;
             overflow: hidden;
             cursor: pointer;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
             transition: all 0.4s ease;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
 
-            // Overlay semitransparente para mejorar legibilidad
+            // Overlay semitransparente
             &::after {
                 content: "";
                 position: absolute;
                 inset: 0;
-                background: rgba(0,0,0,0.35);
+                background: rgba(0, 0, 0, 0.35);
                 border-radius: 16px;
                 pointer-events: none;
             }
 
             &:hover {
                 transform: translateY(-8px) scale(1.03);
-                box-shadow: 0 15px 30px rgba(0,0,0,0.7);
+                box-shadow: 0 15px 30px rgba(0, 0, 0, 0.7);
+                animation: gradientMove 3s ease infinite;
             }
 
             .card-icon {
@@ -52,7 +82,7 @@
                 margin-bottom: 1rem;
                 position: relative;
                 z-index: 1;
-                color: #ffeaa7; // color tipo neón para iconos
+                color: #ffeaa7;
             }
 
             .card-title {
@@ -61,21 +91,21 @@
                 margin-bottom: 0.5rem;
                 position: relative;
                 z-index: 1;
-                color: #ffffff; // blanco puro para títulos
-                text-shadow: 0 0 6px rgba(255,255,255,0.6);
+                color: #ffffff;
+                text-shadow: 0 0 6px rgba(255, 255, 255, 0.6);
             }
 
             .card-description {
                 font-size: 1rem;
                 margin-bottom: 1.5rem;
-                color: #dcdde1; // blanco suave para descripciones
+                color: #dcdde1;
                 position: relative;
                 z-index: 1;
             }
 
             .card-button {
                 padding: 0.6rem 1.2rem;
-                background: rgba(255,255,255,0.2);
+                background: rgba(255, 255, 255, 0.2);
                 border: none;
                 border-radius: 8px;
                 color: #fff;
@@ -84,38 +114,68 @@
                 transition: all 0.3s ease;
                 position: relative;
                 z-index: 1;
-                box-shadow: 0 0 8px rgba(255,255,255,0.3);
+                box-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
 
                 &:hover {
-                    background: rgba(255,255,255,0.35);
+                    background: rgba(255, 255, 255, 0.35);
                     transform: scale(1.05);
-                    box-shadow: 0 0 12px rgba(255,255,255,0.5);
+                    box-shadow: 0 0 12px rgba(255, 255, 255, 0.5);
                 }
             }
         }
 
         // Gradientes por card
-        .card:nth-child(1) { 
-            background: linear-gradient(135deg, #6c5ce7, #a29bfe);
+        .card:nth-child(1) {
+            background: linear-gradient(135deg, #667eea, #764ba2);
         }
-        .card:nth-child(2) { 
-            background: linear-gradient(135deg, #00b894, #55efc4);
+
+        .card:nth-child(2) {
+            background: linear-gradient(135deg, #00b894, #00cec9);
         }
-        .card:nth-child(3) { 
-            background: linear-gradient(135deg, #ff7675, #fab1a0);
+
+        .card:nth-child(3) {
+            background: linear-gradient(135deg, #ff6b6b, #ff9f43);
+        }
+
+        .card:nth-child(4) {
+            background: linear-gradient(135deg, #6c5ce7, #00b894);
+        }
+
+        .card:nth-child(5) {
+            background: linear-gradient(135deg, #fd79a8, #e84393);
+        }
+
+        .card:nth-child(6) {
+            background: linear-gradient(135deg, #00cec9, #0984e3);
+        }
+
+        .card:nth-child(7) {
+            background: linear-gradient(135deg, #ffeaa7, #fab1a0);
+        }
+
+        .card:nth-child(8) {
+            background: linear-gradient(135deg, #a29bfe, #6c5ce7);
+        }
+
+        .card:nth-child(9) {
+            background: linear-gradient(135deg, #ff9f43, #ff6b6b);
         }
     }
-}
 
-/* Fondo animado de toda la página */
-.home-container {
-    display: flex;
-    flex-direction: column;
+    // Fondo animado de toda la página
 
-    @keyframes gradient {
-        0% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
-        100% { background-position: 0% 50%; }
+    @keyframes gradientMove {
+        0% {
+            background-position: 0% 50%;
+        }
+
+        50% {
+            background-position: 100% 50%;
+        }
+
+        100% {
+            background-position: 0% 50%;
+        }
     }
 }
 
