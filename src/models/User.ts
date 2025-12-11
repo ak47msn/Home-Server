@@ -11,6 +11,7 @@ export interface IUser extends Document {
     bio?: string;
     lastLogin?: Date;
     permissions: string[];
+    baseDir?: string; // ruta base de archivos del usuario
     settings: {
         emailNotifications: boolean;
         publicProfile: boolean;
@@ -33,6 +34,7 @@ const UserSchema = new Schema<IUser>(
             emailNotifications: { type: Boolean, default: true },
             publicProfile: { type: Boolean, default: false },
         },
+        baseDir: { type: String, required: true }, // se asigna al crear usuario
     },
     {
         timestamps: true,

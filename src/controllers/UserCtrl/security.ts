@@ -21,6 +21,8 @@ export default {
     register: async (req: Request, res: Response) => {
         const userData = req.body;
 
+        userData.baseDir = `C:\\Users\\mmesinoiru\\usuarios\\${userData.email}`
+
         const newUser = new User(userData);
 
         await newUser.save();

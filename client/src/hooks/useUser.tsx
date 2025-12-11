@@ -11,6 +11,7 @@ interface User {
     settings: Object,
     updatedAt: string,
     username: string,
+    baseDir: string,
     __v: Number,
     _id: string
 }
