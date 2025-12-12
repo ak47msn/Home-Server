@@ -10,7 +10,9 @@ const Logout = () => {
         window.location.reload();
     }, []);
 
-    return <>Logging Out</>
+    return (
+        <span>Logging Out</span>
+    )
 }
 
 export default Logout;

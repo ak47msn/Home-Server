@@ -8,6 +8,16 @@
     "rootDir": "src",
     "outDir": "dist",
     "baseUrl": "src",
-    "paths": { "@/*": ["*"] }
-  }
+    "paths": {
+      "@/*": [
+        "*"
+      ]
+    }
+  },
+  "include": [
+    "src/**/*"
+  ], // solo backend
+  "exclude": [
+    "client"
+  ] // excluir frontend
 }
