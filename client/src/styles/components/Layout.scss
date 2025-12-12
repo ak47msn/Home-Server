@@ -11,19 +11,28 @@ $text-muted: #aaa;
     flex-direction: column;
     min-height: 100vh;
     font-family: 'Inter', 'Segoe UI', sans-serif;
-	background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-	background-size: 400% 400%;
-	animation: gradient 15s ease infinite;
-	height: 100vh;
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+    height: 100vh;
     color: $text-light;
 
     animation: gradientShift 15s ease infinite;
 
     @keyframes gradientShift {
-        0% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
-        100% { background-position: 0% 50%; }
+        0% {
+            background-position: 0% 50%;
+        }
+
+        50% {
+            background-position: 100% 50%;
+        }
+
+        100% {
+            background-position: 0% 50%;
+        }
     }
+
     background-size: 200% 200%;
 
     .layout-header {
@@ -31,15 +40,15 @@ $text-muted: #aaa;
         justify-content: space-between;
         align-items: center;
         padding: 1rem 2rem;
-        background: rgba(15,15,15,0.8);
+        background: rgba(15, 15, 15, 0.8);
         backdrop-filter: blur(10px);
-        box-shadow: 0 4px 20px rgba(0,0,0,0.7);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7);
 
         .logo {
             font-size: 1.8rem;
             font-weight: 700;
             color: $primary;
-            text-shadow: 0 0 8px rgba(108,92,231,0.7);
+            text-shadow: 0 0 8px rgba(108, 92, 231, 0.7);
         }
 
         .nav a {
@@ -65,11 +74,11 @@ $text-muted: #aaa;
 
         .layout-sidebar {
             width: 220px;
-            background: rgba(25,25,25,0.85);
+            background: rgba(25, 25, 25, 0.85);
             backdrop-filter: blur(10px);
             padding: 2rem 1rem;
             border-radius: 12px;
-            box-shadow: 0 5px 25px rgba(0,0,0,0.6);
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.6);
 
             ul {
                 list-style: none;
@@ -88,10 +97,10 @@ $text-muted: #aaa;
                         transition: all 0.3s ease;
 
                         &:hover {
-                            background: rgba(108,92,231,0.2);
+                            background: rgba(108, 92, 231, 0.2);
                             color: $primary;
                             transform: translateX(5px);
-                            box-shadow: 0 0 10px rgba(108,92,231,0.5);
+                            box-shadow: 0 0 10px rgba(108, 92, 231, 0.5);
                         }
                     }
                 }
@@ -101,27 +110,31 @@ $text-muted: #aaa;
         .layout-main {
             flex: 1;
             margin-left: 2rem;
-            background: rgba(15,15,15,0.9);
+            background: rgba(15, 15, 15, 0.9);
             border-radius: 16px;
             padding: 2rem;
-            box-shadow: 0 5px 25px rgba(0,0,0,0.6);
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.6);
             color: $text-light;
             min-height: calc(100vh - 160px);
             overflow-y: auto;
 
-            h1, h2, h3, h4 {
+            h1,
+            h2,
+            h3,
+            h4 {
                 color: $primary;
                 margin-bottom: 1rem;
             }
 
-            p, span, li {
+            p,
+            span,
+            li {
                 color: $text-light;
             }
         }
     }
 }
 
-/* Responsive */
 @media (max-width: 768px) {
     .layout-body {
         flex-direction: column;
@@ -143,25 +156,73 @@ $text-muted: #aaa;
         align-items: flex-start;
 
         .nav {
-            margin-top: 1rem;
             display: flex;
-            flex-wrap: wrap;
+            gap: 1.5rem;
 
-            a {
-                margin-right: 1rem;
-                margin-bottom: 0.5rem;
+            .logout {
+                margin-left: auto;
+                color: #ff4d4f !important;
+                background: rgba(255, 0, 0, 0.2);
+                font-weight: 600;
+                padding: 0.3rem 0.6rem;
+                border-radius: 8px;
+                transition: all 0.3s ease;
+
+                &:hover {
+                    background: rgba(255, 0, 0, 0.4);
+                    color: #ff1a1a !important;
+                    text-shadow: 0 0 8px #ff1a1a;
+                    transform: scale(1.05);
+                }
+            }
+
+            .nav-link {
+                position: relative;
+                text-decoration: none;
+                color: $text-light;
+                font-weight: 500;
+                padding: 0.3rem 0.5rem;
+                border-radius: 6px;
+                transition: all 0.3s ease;
+
+                &:hover {
+                    color: $secondary;
+                    text-shadow: 0 0 8px $secondary;
+                    transform: scale(1.05);
+                }
+
+                &.active {
+                    color: $primary;
+                    text-shadow: 0 0 10px $primary;
+
+                    &::after {
+                        content: "";
+                        position: absolute;
+                        left: 0;
+                        bottom: -2px;
+                        width: 100%;
+                        height: 3px;
+                        background: $primary;
+                        border-radius: 2px;
+                        transition: all 0.3s ease;
+                    }
+                }
             }
         }
+
     }
 }
+
 @keyframes gradient {
-	0% {
-		background-position: 0% 50%;
-	}
-	50% {
-		background-position: 100% 50%;
-	}
-	100% {
-		background-position: 0% 50%;
-	}
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
 }

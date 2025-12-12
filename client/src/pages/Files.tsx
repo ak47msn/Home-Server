@@ -19,8 +19,20 @@ const Files = () => {
     const [sortOption, setSortOption] = useState<"nameAsc" | "nameDesc" | "created" | "modified">("nameAsc");
     const [recursive, setRecursive] = useState(false);
     const [foldersFirst, setFoldersFirst] = useState(true);
-    const [showHidden, setShowHidden] = useState(false); // <-- checkbox nuevo
+    const [showHidden, setShowHidden] = useState(false);
     const token = localStorage.getItem("token");
+
+    const [contextMenu, setContextMenu] = useState<{
+        visible: boolean;
+        x: number;
+        y: number;
+        file: FileType | null;
+    }>({
+        visible: false,
+        x: 0,
+        y: 0,
+        file: null,
+    });
 
     const fetchFiles = async (path: string) => {
         setLoading(true);
@@ -52,15 +64,65 @@ const Files = () => {
         setCurrentPath("/" + parts.join("/"));
     };
 
+    useEffect(() => {
+        const handleClick = () => setContextMenu(c => ({ ...c, visible: false }));
+        window.addEventListener("click", handleClick);
+        return () => window.removeEventListener("click", handleClick);
+    }, []);
+
+    const handleOpen = () => {
+        if (contextMenu.file?.isDirectory) enterDirectory(contextMenu.file.name);
+        setContextMenu({ ...contextMenu, visible: false });
+    };
+
+    const handleRename = async () => {
+        const newName = prompt("Nuevo nombre:", contextMenu.file?.name);
+        if (!newName || !contextMenu.file) return;
+
+        console.log("RENOMBRAR:", {
+            oldName: contextMenu.file.name,
+            newName,
+            currentPath,
+        });
+
+        setContextMenu({ ...contextMenu, visible: false });
+    };
+
+    const handleDelete = async () => {
+        if (!contextMenu.file) return;
+        if (!confirm(`¿Eliminar ${contextMenu.file.name}?`)) return;
+
+        console.log("ELIMINAR:", {
+            name: contextMenu.file.name,
+            currentPath,
+        });
+
+        setContextMenu({ ...contextMenu, visible: false });
+    };
+
+    const handleCopy = () => {
+        console.log("COPIAR:", {
+            name: contextMenu.file?.name,
+            currentPath,
+        });
+        setContextMenu({ ...contextMenu, visible: false });
+    };
+
+    const handleMove = () => {
+        console.log("MOVER:", {
+            name: contextMenu.file?.name,
+            currentPath,
+        });
+        setContextMenu({ ...contextMenu, visible: false });
+    };
+
     const breadcrumbs = currentPath.split("/").filter(Boolean);
 
-    // Filtrado y búsqueda
     let displayedFiles = files
         .filter(f => (filterType === "folder" ? f.isDirectory : filterType === "file" ? !f.isDirectory : true))
         .filter(f => f.name.toLowerCase().includes(searchTerm.toLowerCase()))
-        .filter(f => showHidden || !f.name.startsWith(".")); // <-- filtrar ocultos
+        .filter(f => showHidden || !f.name.startsWith("."));
 
-    // Ordenar carpetas primero si toggle activo
     if (foldersFirst) {
         displayedFiles = [...displayedFiles].sort((a, b) => {
             if (a.isDirectory && !b.isDirectory) return -1;
@@ -69,13 +131,10 @@ const Files = () => {
         });
     }
 
-    // Ordenamiento secundario
     displayedFiles = displayedFiles.sort((a, b) => {
         switch (sortOption) {
-            case "nameAsc":
-                return a.name.localeCompare(b.name);
-            case "nameDesc":
-                return b.name.localeCompare(a.name);
+            case "nameAsc": return a.name.localeCompare(b.name);
+            case "nameDesc": return b.name.localeCompare(a.name);
             case "created":
                 return (a.createdAt ? new Date(a.createdAt).getTime() : 0) -
                     (b.createdAt ? new Date(b.createdAt).getTime() : 0);
@@ -90,7 +149,6 @@ const Files = () => {
     return (
         <div className="files-container">
             <h2>Explorador de Archivos</h2>
-
             <div className="breadcrumbs">
                 <span onClick={() => setCurrentPath("/")}>/</span>
                 {breadcrumbs.map((folder, idx) => {
@@ -141,6 +199,19 @@ const Files = () => {
             {loading && <p className="loading">Cargando...</p>}
             {error && <p className="error">{error}</p>}
 
+            {contextMenu.visible && contextMenu.file && (
+                <div
+                    className="context-menu"
+                    style={{ top: contextMenu.y, left: contextMenu.x }}
+                >
+                    <div onClick={handleOpen}>Abrir</div>
+                    <div onClick={handleRename}>Renombrar</div>
+                    <div onClick={handleMove}>Mover</div>
+                    <div onClick={handleCopy}>Copiar</div>
+                    <div onClick={handleDelete} className="danger">Eliminar</div>
+                </div>
+            )}
+
             <ul className="file-list">
                 {currentPath !== "/" && (
                     <li className="file-item folder" onClick={goUp}>
@@ -151,13 +222,25 @@ const Files = () => {
                 {displayedFiles.map(file => (
                     <li
                         key={file.name}
-                        className={`file-item ${file.isDirectory ? "folder" : "file"} ${file.name.startsWith('.') ? "hidden-file" : ""}`}
+                        className={`file-item ${file.isDirectory ? "folder" : "file"}`}
                         onClick={() => file.isDirectory && enterDirectory(file.name)}
+                        onContextMenu={(e) => {
+                            e.preventDefault();
+                            setContextMenu({
+                                visible: true,
+                                x: e.pageX,
+                                y: e.pageY,
+                                file,
+                            });
+                        }}
                     >
                         {file.isDirectory ? "📁" : "📄"} {file.name}
                     </li>
                 ))}
             </ul>
+
+            {loading && <p className="loading">Cargando...</p>}
+            {error && <p className="error">{error}</p>}
         </div>
     );
 };

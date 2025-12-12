@@ -6,8 +6,6 @@ import "dotenv/config";
 const secret = process.env.JWT_SECRET_KEY;
 if (!secret) throw new Error("JWT_SECRET_KEY no está definido");
 
-
-
 export default {
     login: (req: Request, res: Response) => {
         const { username } = req.body;

@@ -19,7 +19,7 @@ const Home = () => {
             description: "Acorta tus enlaces y hazlos fáciles de compartir.",
             icon: "🔗",
             gradient: "linear-gradient(135deg, #00b894, #00cec9)",
-            href: "/url"
+            href: "/shorturl"
         },
         {
             title: "IA",

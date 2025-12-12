@@ -16,7 +16,6 @@ interface User {
     _id: string
 }
 
-
 let initialToken = localStorage.getItem("token");
 
 export const useUser = () => {

@@ -5,14 +5,12 @@ import path from "path";
 export default {
   readDir: async (req: Request, res: Response) => {
     try {
-      // 1. Verificar autenticación
       const userId = req.user?._id;
       if (!userId) return res.status(401).json({ message: "No autorizado" });
 
       const user = req.user;
       if (!user || !user.baseDir) return res.status(403).json({ message: "Usuario no tiene directorio asignado" });
 
-      // 2. Obtener parámetros
       const directoryParam = req.query.directory;
       const recursive = req.query.recursive === "true";
 
@@ -23,33 +21,27 @@ export default {
 
       console.log(relativePath);
 
-      // 3. Construir ruta segura
       const safeDirectory = path.resolve(user.baseDir, "." + relativePath);
 
       console.log(safeDirectory)
-      // 4. Validar que no escape del baseDir
       if (!safeDirectory.startsWith(user.baseDir)) {
         return res.status(403).json({ message: "Acceso denegado" });
       }
 
-      // 5. Validar que sea un directorio
       if (!lstatSync(safeDirectory).isDirectory()) {
         return res.status(400).json({ message: "Ruta no es un directorio válido" });
       }
 
-      // 6. Función para leer directorio recursivamente de forma segura
       const readDirRecursive = (dir: string, base: string): any[] => {
         const entries = readdirSync(dir, { withFileTypes: true });
         let files: any[] = [];
 
         for (const entry of entries) {
-          // Evitar archivos peligrosos o nombres con caracteres extraños
           if (entry.name.includes("\0")) continue;
 
           const fullPath = path.join(dir, entry.name);
           const stats = statSync(fullPath);
 
-          // Validar que siga dentro del baseDir
           if (!fullPath.startsWith(base)) continue;
 
           const fileObj = {

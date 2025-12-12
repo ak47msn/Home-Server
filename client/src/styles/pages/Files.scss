@@ -233,3 +233,32 @@
         }
     }
 }
+
+.context-menu {
+    position: fixed;
+    background: #1e1e1e;
+    color: white;
+    border: 1px solid #333;
+    border-radius: 8px;
+    min-width: 160px;
+    z-index: 9999;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+
+    div {
+        padding: 10px 14px;
+        cursor: pointer;
+        transition: 0.15s;
+
+        &:hover {
+            background: #333;
+        }
+    }
+
+    .danger {
+        color: #ff4d4d;
+
+        &:hover {
+            background: #661212;
+        }
+    }
+}

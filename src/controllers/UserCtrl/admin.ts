@@ -1,7 +1,6 @@
 
 
 export default {
-    /* Admin Functions */
     getAllUsers: (req: Request, res: Response) => {
 
     },

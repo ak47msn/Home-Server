@@ -18,14 +18,39 @@ export interface IFile extends Document {
 }
 
 const FileSchema = new Schema<IFile>({
-    name: { type: String, required: true },
-    path: { type: String, required: true },
-    size: { type: Number, required: true },
-    mimeType: { type: String, required: true },
-    checksum: { type: String, required: true }, 
-    extension: { type: String, required: true },
-    owner: { type: Schema.Types.ObjectId, ref: 'User', required: true },
-    directory: { type: Schema.Types.ObjectId, ref: 'Directory', required: true },
+    name: {
+        type: String,
+        required: true
+    },
+    path: {
+        type: String,
+        required: true
+    },
+    size: {
+        type: Number,
+        required: true
+    },
+    mimeType: {
+        type: String,
+        required: true
+    },
+    checksum: {
+        type: String,
+        required: true
+    },
+    extension: {
+        type: String,
+        required: true
+    },
+    owner: {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
+    },
+    directory: {
+        type: Schema.Types.ObjectId,
+        ref: 'Directory', required: true
+    },
     tags: [{ type: String }],
     description: { type: String },
 }, { timestamps: true });

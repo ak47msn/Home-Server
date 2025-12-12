@@ -5,6 +5,7 @@ import Layout from "./components/Layout"
 import { ProtectedRoute } from "./components/ProtectedRoute"
 import Logout from "./components/Logout"
 import Files from "./pages/Files"
+import ShortUrl from "./pages/ShortUrl"
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
 
             <Route path="/about" element={<Login />} />
             <Route path="/files" element={<Files />} />
+            <Route path="/shorturl" element={<ShortUrl />} />
           </Route>
         </Route>
       </Routes>
